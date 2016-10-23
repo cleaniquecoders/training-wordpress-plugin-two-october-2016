@@ -1,5 +1,5 @@
 <div class="bs-wrapper">
-	<form class="form-horizontal">
+	<form class="form-horizontal" method="post" action="<?php echo admin_url('admin.php?page=new-inventory'); ?>">
 		<fieldset>
 
 		<!-- Form Name -->

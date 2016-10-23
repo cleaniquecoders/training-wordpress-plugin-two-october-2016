@@ -101,15 +101,15 @@ class GenericBookingView
 
     public function manageInventories()
     {
-        require_once GENERIC_BOOKING_APP . 'controllers/manage-inventories.php';
-        require_once GENERIC_BOOKING_APP . 'models/manage-inventories.php';
-        require_once GENERIC_BOOKING_APP . 'views/manage-inventories.php';
+        require_once GENERIC_BOOKING_APP . 'controllers/inventory/index.php';
+        require_once GENERIC_BOOKING_APP . 'models/inventory/index.php';
+        require_once GENERIC_BOOKING_APP . 'views/inventory/index.php';
     }
 
     public function addInventory()
     {
-        //require_once GENERIC_BOOKING_APP . 'controllers/add-inventory.php';
-        //require_once GENERIC_BOOKING_APP . 'models/add-inventory.php';
+        require_once GENERIC_BOOKING_APP . 'controllers/inventory/create.php';
+        require_once GENERIC_BOOKING_APP . 'models/inventory/create.php';
         require_once GENERIC_BOOKING_APP . 'views/inventory/create.php';
     }
 }
