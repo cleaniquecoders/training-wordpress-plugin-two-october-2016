@@ -14,16 +14,19 @@ if (!defined('WPINC')) {
 }
 
 // Set Plugin Directory Path
-define('BOOKING_DIR', plugin_dir_path(__FILE__));
+define('GENERIC_BOOKING_DIR', plugin_dir_path(__FILE__));
+
+// Set application path
+define('GENERIC_BOOKING_APP', GENERIC_BOOKING_DIR . 'app/');
 
 // Set Plugin URI
-define('BOOKING_URI', plugin_dir_url(__FILE__));
+define('GENERIC_BOOKING_URI', plugin_dir_url(__FILE__));
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require BOOKING_DIR . 'app/bootstrap.php';
+require GENERIC_BOOKING_DIR . 'app/bootstrap.php';
 
 register_activation_hook(__FILE__, 'genericBookingplugin_activate');
 
@@ -31,6 +34,7 @@ register_deactivation_hook(__FILE__, 'genericBookingplugin_deactivate');
 
 function genericBookingplugin_activate()
 {
+    $plugin_data = get_plugin_data(__FILE__);
     $version = $plugin_data['Version'];
 
     // check WordPress version, if less than version we need, don't activate
@@ -42,6 +46,8 @@ function genericBookingplugin_activate()
     if (get_option('genericBookingplugin_version') === false) {
         add_option('genericBookingplugin_version', $version);
         // create tables if any
+        require_once GENERIC_BOOKING_APP . 'database/setup_tables.php';
+        genericBookingplugin_setup_tables();
     } else if (get_option('genericBookingplugin_version') < $version) {
         // else, do update the slider version
         update_option('genericBookingplugin_version', $version);
